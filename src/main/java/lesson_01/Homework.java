@@ -38,24 +38,29 @@ public class Homework {
 
 //        ВО ВТОРОЙ ЗАДАЧЕ СКАЗАНО ПРО ВВОД С КЛАВИАТУРЫ, ТАК ЧТО ВОТ ОН :)
 
-        while (true) {
-            System.out.println("\nВведите слово. \nОно будет проверено на состав. \nЕсли оно состоит только из латинских букв," +
-                    "\nто вернется \"YES\", в ином случае \"NO\".\nДля завершения введите stop\n");
-            String strFromKeyboard = new Scanner(System.in).nextLine().trim();
-
-            System.out.println("\"" + strFromKeyboard + "\"" + " состоит из букв латинского алфавита: "
-                    + "\"" + isOnlyLatins(strFromKeyboard) + "\"");
-
-            if (strFromKeyboard.equalsIgnoreCase("stop")){
-                break;
-            }
-        }
+//        while (true) {
+//            System.out.println("\nВведите слово. \nОно будет проверено на состав. \nЕсли оно состоит только из латинских букв," +
+//                    "\nто вернется \"YES\", в ином случае \"NO\".\nДля завершения введите stop\n");
+//            String strFromKeyboard = new Scanner(System.in).nextLine().trim();
+//
+//            System.out.println("\"" + strFromKeyboard + "\"" + " состоит из букв латинского алфавита: "
+//                    + "\"" + isOnlyLatins(strFromKeyboard) + "\"");
+//
+//            if (strFromKeyboard.equalsIgnoreCase("stop")){
+//                break;
+//            }
+//        }
 
 
 //        ТРЕТЬЯ ЗАДАЧА НА СТРОКИ
 
+        String strTask03_01 = "Рама@";      // Рам
+        String strTask03_02 = "Правк@а@";   // Прав
+        String strTask03_03 = "С@лово";    // лово
 
-
+        System.out.println(
+                deleteCharBeforeAtSymbol(strTask03_03)
+        );
 
     }
 
@@ -120,9 +125,8 @@ public class Homework {
 
         char[] chars = str.toCharArray();
 
-        for (int i = 0; i < chars.length; i++) {
-            int a = chars[i];
-            if (!(a >= 65 && a <= 90) && !(a >= 97 && a <= 122)){
+        for (int a : chars) {
+            if (!(a >= 65 && a <= 90) && !(a >= 97 && a <= 122)) {
                 return "NO";
             }
         }
@@ -131,5 +135,23 @@ public class Homework {
     }
 
 
+    public static String deleteCharBeforeAtSymbol(String str){
+
+        char[] chars = str.toCharArray();
+        String result = "";
+
+
+
+        for (int i = 0; i < chars.length; i++) {
+            if (chars[i] == '@' ||
+                    i < chars.length - 1 && chars[i + 1] == '@'){
+                continue;
+            }
+            result = result.concat(String.valueOf(chars[i]));
+        }
+
+
+        return result;
+    }
 
 }
