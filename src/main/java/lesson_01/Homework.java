@@ -14,7 +14,7 @@ public class Homework {
         int[] ints_05 = {-1, -2, 15, 14, 100, 90, 80, 70, 60};      // 5
 
         System.out.println(
-                getLengthOfNumbersInDecreasingSequence(ints_05)
+                getLengthOfNumbersInDecreasingSequence(ints_03)
         );
 
 //        ПЕРВАЯ ЗАДАЧА НА СТРОКИ
@@ -67,24 +67,21 @@ public class Homework {
     public static int getLengthOfNumbersInDecreasingSequence(int[] ints){
 
         int result = 0;
+        int line = 1;
 
-        for (int i = 0; i < ints.length - 1; i++) {
-            int length = 1;
-            for (int j = i; j < ints.length - 1; j++) {
-                if(ints[j] > ints[j+1]){
-                    length += 1;
-                    if (length > result) {
-                        result = length;
-                        }
-                } else {
-                    if (length > result) {
-                        result = length;
-                    }
-                    i = j;
-                    break;
+        for (int i = 0; i < ints.length - 1; i++){
+            if(ints[i + 1] < ints[i]){
+                line += 1;
+                if(line > result){
+                    result = line;
                 }
+            } else if(line > result){
+                result = line;
+            } else {
+                line = 1;
             }
         }
+
         return result;
     }
 
