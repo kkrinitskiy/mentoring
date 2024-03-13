@@ -109,16 +109,7 @@ public class Homework {
         words[numbOfBiggest] = smallest;
         words[numbOfSmallest] = biggest;
 
-        String result = "";
-        for (int i = 0; i < words.length; i++) {
-            if(i == words.length-1){
-                result = result.concat(words[i]);
-                break;
-            }
-            result = result.concat(words[i]).concat(" ");
-        }
-
-        return result;
+        return String.join(" ", words);
     }
 
     public static String isOnlyLatins(String str){
