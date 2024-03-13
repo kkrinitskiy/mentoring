@@ -59,7 +59,7 @@ public class Homework {
         String strTask03_03 = "С@лово";    // лово
 
         System.out.println(
-                deleteCharBeforeAtSymbol(strTask03_03)
+                deleteCharBeforeAtSymbol(strTask03_02)
         );
 
     }
@@ -114,7 +114,7 @@ public class Homework {
         char[] chars = str.toCharArray();
 
         for (int a : chars) {
-            if (!(a >= 65 && a <= 90) && !(a >= 97 && a <= 122)) {
+            if (!(a >= 'A' && a <= 'Z') && !(a >= 'a' && a <= 'z')) {
                 return "NO";
             }
         }
@@ -129,13 +129,14 @@ public class Homework {
         String result = "";
 
 
+        for (int i = 1; i < chars.length; i++) {
 
-        for (int i = 0; i < chars.length; i++) {
-            if (chars[i] == '@' ||
-                    i < chars.length - 1 && chars[i + 1] == '@'){
-                continue;
+            if (chars[i] != '@' && chars[i - 1] != '@'){
+                result = result.concat(String.valueOf(chars[i - 1]));
+                if(i == chars.length - 1){
+                    result = result.concat(String.valueOf(chars[i]));
+                }
             }
-            result = result.concat(String.valueOf(chars[i]));
         }
 
 
