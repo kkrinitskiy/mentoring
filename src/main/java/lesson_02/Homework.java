@@ -51,6 +51,7 @@ public class Homework {
         System.out.println("Количество слов в предложении: " + howMuchWordsInInput(input));
 
 //                          2 ЗАДАЧА
+	    
         String json =
                         "{" +
                         "'Предмет' : 'Информатика', " +
@@ -60,6 +61,26 @@ public class Homework {
                         "}";
 
          System.out.println(jsonParser(json));
+	    
+//                          ARRAYLIST
+//                          1 ЗАДАЧА
+	ArrayList<Integer> list_01 = new ArrayList<>();
+	ArrayList<Integer> list_02 = new ArrayList<>();
+	    
+	for(int i = 1; i < 9; i++){
+		list_01.add(i);
+	}
+	    
+	int[] ints_03 = new int[]{10, 15, 6, -8, 41, 9, 16, -5, 0};
+	    
+	for(int i : ints_03){
+		list_02.add(i);
+	}
+	    
+	    
+	for(ArrayList<Integer> list : provideReverseAndRegularList(list_01)){
+		System.out.println(list);
+	}
 
     }
 
@@ -163,6 +184,27 @@ public class Homework {
 	    }
 	    
 	    return sum / counter;
-	}
+    }
+
+    public static ArrayList<ArrayList<Integer>> provideReverseAndRegularList(ArrayList<Integer> list){
+	    ArrayList<ArrayList<Integer>> lists = new ArrayList<>(2);
+	    
+	    list.trimToSize();
+	    int size = list.size();
+	    
+	    ArrayList<Integer> reversedList = new ArrayList(list.size());
+	    
+	    for (int i = list.size() - 1; i >= 0; i--){
+	        reversedList.add(list.get(i));
+	    }
+	    
+	    lists.add(list);
+	    lists.add(reversedList);
+	    
+	    return lists;
+	    
+	}	
+
+	
 
 }
