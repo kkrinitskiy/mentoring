@@ -58,7 +58,7 @@ public class Homework {
                         "'Преподаватель' : 'Иванова'" +
                         "}";
 
-        jsonParser(json);
+         System.out.println(jsonParser(json));
 
     }
 
@@ -130,13 +130,38 @@ public class Homework {
     }
 
     public static String jsonParser(String json){
-        String[] strings = json.split("[{\\s:]? ");
-        for (String string : strings) {
-            System.out.println(string);
-        }
+        String firstDelimiter = " : ";
+	    String secondDelimiter = ", \'";
 
-
-        return "";
+	    int start = json.indexOf(firstDelimiter) + firstDelimiter.length() + 1;
+	    int end = json.indexOf(secondDelimiter, start) - 1;
+	    
+	    StringBuilder sb = new StringBuilder(json.substring(start, end));
+	    
+	    start = json.indexOf(firstDelimiter, end);
+	    end = json.indexOf(secondDelimiter, start) - 1;
+	    sb.append(" ").append(getAverageGrade(start, end, json));
+	    
+	    start = json.indexOf(firstDelimiter, end);
+	    end = json.indexOf(secondDelimiter, start) - 1;
+	    sb.append(" ").append(getAverageGrade(start, end, json));
+	    
+	    return sb.toString();
     }
+    private static double getAverageGrade(int start, int end, String json){
+	    
+	    char[] grades = json.substring(start, end).toCharArray();
+	    double counter = 0;
+	    double sum = 0;
+	    
+	    for (int i = 0; i < grades.length; i++){
+	        if (grades[i] >= '0' && grades[i] <= '5'){
+	            counter++;
+	            sum += Character.getNumericValue(grades[i]);
+	        }
+	    }
+	    
+	    return sum / counter;
+	}
 
 }
