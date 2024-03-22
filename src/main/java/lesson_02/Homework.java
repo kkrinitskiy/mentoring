@@ -41,19 +41,26 @@ public class Homework {
 
 //                           СТРОКИ
 //                          1 ЗАДАЧА
+        ArrayList<String> strings = new ArrayList<>();
+        strings.add("Привет, мне 17 лет, живу в доме номер 8");
+        strings.add("Около дома растут цветы");
+        strings.add("*** на этапе компиляции");
+        strings.add("10 + 5 = 15");
+        strings.add("!!!аыва** 175 - 8 ___ +");
 
-//        Привет, мне 17 лет, живу в доме номер 8
-//        Около дома растут цветы
-//        *** на этапе компиляции
-//        10 + 5 = 15
-//        !!!аыва**
-//        175 - 8 ___ +
-        String input = "";
-        System.out.println("Введите предложение: ");
-//        input = new Scanner(System.in).nextLine();
-        System.out.println("\tВаше предложение: \"" + input + "\"");
-        System.out.println("\tКоличество слов в предложении: "
-                + howMuchWordsInInput(input) + "\n");
+        for (String string : strings) {
+            System.out.println("Введенное предложение: " + string);
+            System.out.println("\tколичество слов в предложении: "
+                    + howMuchWordsInInputNonUsingRegexMethod(string));
+        }
+
+
+//        String input = "";
+//        System.out.println("Введите предложение: ");
+////        input = new Scanner(System.in).nextLine();
+//        System.out.println("\tВаше предложение: \"" + input + "\"");
+//        System.out.println("\tКоличество слов в предложении: "
+//                + howMuchWordsInInput(input) + "\n");
 
 //                          2 ЗАДАЧА
 	    
@@ -187,13 +194,68 @@ public class Homework {
     }
 
     public static int howMuchWordsInInputNonUsingRegexMethod(String input){
-        int count = 0;
 
-        char[] chars = input.toCharArray();
+        if(input.isEmpty()){
+            return 0;
+        }
 
+        int counter = 0;
 
-        return count;
+        int start = 0;
+        int end;
+        boolean repeat = true;
+
+        while (repeat){
+
+            if(start + 1 < input.length()) {
+                end = input.indexOf(" ", start + 1);
+            } else {
+                end = input.length();
+            }
+
+            if(end == -1){
+                end = input.length();
+                repeat = false;
+            }
+
+            String word = input.substring(start, end).strip();
+            if(isWord(word)){
+                counter++;
+            }
+
+            start = end;
+        }
+
+        return counter;
     }
+
+    private static boolean isWord(String word){
+        char[] chars = word.toCharArray();
+
+        boolean itIsWord = true;
+
+        if(!Character.isAlphabetic(chars[0])){
+            return false;
+        }
+
+        for (int i = 1; i < chars.length; i++) {
+            if(!Character.isAlphabetic(chars[i])){
+                for (int j = i; j < chars.length; j++) {
+
+                    if(j < chars.length - 1 &&
+                        (Character.isLetterOrDigit(chars[j]) ||
+                        chars[j] != '!' ||
+                        chars[j] != '?' ||
+                        chars[j] != '.')){
+                        return false;
+                    }
+                }
+            }
+        }
+
+        return itIsWord;
+    }
+
 
     public static String jsonParser(String json){
         String firstDelimiter = " : ";
