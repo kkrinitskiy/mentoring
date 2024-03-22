@@ -1,5 +1,6 @@
 package lesson_02;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -85,6 +86,9 @@ public class Homework {
     }
 
     public static boolean doesContainInTheSameSequence(int[] fir, int[] sec){
+        if (sec.length > fir.length){
+            return false;
+        }
         for (int i = 0; i < fir.length; i++) {
             if(fir[i] == sec[0]){
                 for (int j = 0; j < sec.length; j++) {
@@ -151,6 +155,15 @@ public class Homework {
         return count;
     }
 
+    public static int howMuchWordsInInputNonUsingRegexMethod(String input){
+        int count = 0;
+
+        char[] chars = input.toCharArray();
+
+
+        return count;
+    }
+
     public static String jsonParser(String json){
         String firstDelimiter = " : ";
 	    String secondDelimiter = ", \'";
@@ -170,9 +183,9 @@ public class Homework {
 	    
 	    return sb.toString();
     }
-    private static double getAverageGrade(int start, int end, String json){
+    private static double getAverageGrade(int start1, int end, String json){
 	    
-	    char[] grades = json.substring(start, end).toCharArray();
+	    char[] grades = json.substring(start1, end).toCharArray();
 	    double counter = 0;
 	    double sum = 0;
 	    
