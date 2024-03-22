@@ -96,6 +96,15 @@ public class Homework {
 
     }
 
+
+
+
+
+
+
+
+
+
     public static boolean doesContainInTheSameSequence(int[] fir, int[] sec){
         if (sec.length > fir.length){
             return false;
