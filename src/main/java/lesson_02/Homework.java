@@ -21,20 +21,23 @@ public class Homework {
         int[] fir_04 = {1, 3, 2, 4, 5, 3, 4, 5};    // true
         int[] sec_04 = {3, 4, 5};
 
-        System.out.println(doesContainInTheSameSequence(fir_04, sec_04));
+        System.out.println("Первый массив содержит в себе второй: "
+                + doesContainInTheSameSequence(fir_04, sec_04) + "\n");
 
-//                          2 ЗАДАЧА TODO: сделать чтобы возвращал массив, а не костыльно печатал из метода
+//                          2 ЗАДАЧА
 
         int[] arms_01 = {15, 123, 0, -8, 16, 153, 142, 12};
         int[] arms_02 = {100, 110, 5, 18, 98, 421};
         int[] arms_03 = {1, 10, 555, 371, 407, 122, 153};
 
-        hasArmstrongNumber(arms_03);
+        System.out.println("Числа армстронга в переданном массиве: "
+                + Arrays.toString(hasArmstrongNumber(arms_02)) + "\n");
 
 //                          3 ЗАДАЧА TODO: вероятно можно сделать в один цикл
 
         int[] ints_01 = {1, 2, 3, 5, 7, 9, -8, 100, 0, 1};
-        System.out.println(Arrays.toString(shift(ints_01, 3)));
+        System.out.println("Резлуьтат сдвига массива: "
+                + Arrays.toString(shift(ints_01, 3)) + "\n");
 
 //                           СТРОКИ
 //                          1 ЗАДАЧА
@@ -48,8 +51,9 @@ public class Homework {
         String input = "";
         System.out.println("Введите предложение: ");
 //        input = new Scanner(System.in).nextLine();
-        System.out.println("Ваше предложение: \"" + input + "\"");
-        System.out.println("Количество слов в предложении: " + howMuchWordsInInput(input));
+        System.out.println("\tВаше предложение: \"" + input + "\"");
+        System.out.println("\tКоличество слов в предложении: "
+                + howMuchWordsInInput(input) + "\n");
 
 //                          2 ЗАДАЧА
 	    
@@ -61,7 +65,7 @@ public class Homework {
                         "'Преподаватель' : 'Иванова'" +
                         "}";
 
-         System.out.println(jsonParser(json));
+         System.out.println("Результат форматирования строки: " + jsonParser(json) + "\n");
 	    
 //                          ARRAYLIST
 //                          1 ЗАДАЧА
@@ -104,22 +108,49 @@ public class Homework {
         return false;
     }
 
-    public static void hasArmstrongNumber(int[] ints){
+
+    public static int[] hasArmstrongNumber(int[] ints){
+        int counter = 0;
+
         for (int i = 0; i < ints.length ; i++) {
-            if(ints[i] > 99 && ints[i] < 1000){
-                int num = ints[i];
-                int sum = 0;
-                while (num > 0){
-                    int a = num % 10;
-                    sum += (int) Math.pow(a, 3);
-                    num /= 10;
-                }
-                if(sum == ints[i]){
-                    System.out.printf("%d ", sum);
-                }
+           if (isArmstrong(ints[i])){
+               counter++;
+           }else {
+               ints[i] = -1;
+           }
+        }
+
+        int[] result = new int[counter];
+        counter = 0;
+
+        for (int anInt : ints) {
+            if (anInt > 0) {
+                result[counter] = anInt;
+                counter++;
             }
         }
-        System.out.println();
+
+        if (result.length == 0){
+            return new int[]{-1};
+        }
+
+        return result;
+    }
+
+    private static boolean isArmstrong(int num){
+        int numbForCheck = num;
+        if(num > 99 && num < 1000){
+            int sum = 0;
+            while (num > 0){
+                int a = num % 10;
+                sum += (int) Math.pow(a, 3);
+                num /= 10;
+            }
+            if(sum == numbForCheck){
+                return true;
+            }
+        }
+        return false;
     }
 
     public static int[] shift(int[] ints, int value){
