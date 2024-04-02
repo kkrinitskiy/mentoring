@@ -1,6 +1,7 @@
-package lesson_02;
+package lesson_02.theory;
 
 import java.util.Arrays;
+import java.util.Random;
 
 public class Algorithms {
     public static void main(String[] args) {
@@ -15,8 +16,7 @@ public class Algorithms {
 //        binarySearch(16, ints, 0,ints.length);
 //        bubbleSort(ints);
 //        selectionSort(ints);
-//        quickSort(ints, 0, ints.length - 1);
-        sorted(ints);
+//        sorted(ints);
 
         long end =  System.nanoTime();
         System.out.println("after sort: " + Arrays.toString( sorted(ints)));
@@ -84,50 +84,7 @@ public class Algorithms {
         }
     }
 
-//    private static void quickSort(int[] ints, int from, int to){
-//        if((to - from) < 1){
-//            return;
-//        }
 //
-//        int m = partition(ints, from, to);
-//        quickSort(ints, from, m);
-//        quickSort(ints, m, to);
-//
-//    }
-//
-//    private static int partition(int[] ints, int from, int to) {
-//        if((to - from) < 1){
-//            return from;
-//        }
-//
-//        int i = from;
-//        int j = to - 1;
-//        int m = median(ints, from, to);
-//
-//        while (i < j){
-//            while (ints[i] < m){
-//                i++;
-//            }
-//            while (ints[j] > m){
-//                j--;
-//            }
-//            if(i <= j){
-//                swap(ints, i, j);
-//                i++;
-//                j--;
-//            } else {
-//                break;
-//            }
-//        }
-//
-//        return i;
-//    }
-
-    private static void swap(int[] ints, int leftIndex, int rightIndex){
-        int storage = ints[leftIndex];
-        ints[leftIndex] = ints[rightIndex];
-        ints[rightIndex] = storage;
-    }
 
     private static int[] sorted(int[] a){
         if(a.length < 2){
