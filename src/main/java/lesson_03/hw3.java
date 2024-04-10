@@ -44,9 +44,21 @@ public class hw3 {
 
         System.out.println("3 ЗАДАЧА");
 
+        int[][] ints1 =
+                {
+                        {10,20,30,40,50},
+                        {114,10},
+                        {-8,-6,0,0,7,-29}
+                };
 
+        System.out.println(Arrays.toString(getAveragesInMultidimensionalArray(ints1)));
 
     }
+
+
+
+
+
 
 
 
@@ -80,6 +92,12 @@ public class hw3 {
         return result;
 
     }
+
+
+
+
+
+
 
 
     private static String secondTask(String input){
@@ -158,6 +176,29 @@ public class hw3 {
                 getSurname(user) + " " +
                 getAverageOnClassWork(user) + " " +
                 getAverageOnTest(user);
+    }
+
+
+
+
+
+
+
+
+    private static int[] getAveragesInMultidimensionalArray(int[][] ints){
+        int[] result = new int[ints.length];
+
+        for (int i = 0; i < ints.length; i++) {
+            int sum = 0;
+            int count = 0;
+            for (int j = 0; j < ints[i].length; j++) {
+                sum += ints[i][j];
+                count++;
+            }
+            result[i] = sum/count;
+        }
+
+        return result;
     }
 
 }
