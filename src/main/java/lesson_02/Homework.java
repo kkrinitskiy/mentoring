@@ -94,6 +94,17 @@ public class Homework {
 		System.out.println(list);
 	}
 
+
+
+
+//                          ДОП ЗАДАЧИ
+//                          1 ЗАДАЧА
+
+        int[] ints = {10, 20, 30, 40, 50};
+
+
+
+
     }
 
 
@@ -318,8 +329,50 @@ public class Homework {
 	    
 	    return lists;
 	    
-	}	
+	}
 
-	
+    public static int[] provideSomeNumbersFromKeyboard(){
+        boolean inputIsOk = true;
+        String s = "";
+        String[] nums;
+        int[] result = new int[10];
+        while (!inputIsOk) {
+            System.out.println("Введите числа через пробел. " +
+                    "\nПервое число: величина на которую будет увеличен исходный массив. " +
+                    "\nОстальные числа, количество которых равно первому числу, будут записаны в новые ячейки массива" +
+                    "\nПример ввода: 3 100 200 300");
+            s = new Scanner(System.in).nextLine().strip();
+            for (char c : s.toCharArray()) {
+                if (Character.isLetter(c)) {
+                    System.out.println("Только цифры и пробелы");
+                    inputIsOk = false;
+                    continue;
+                }
+            }
+            nums = s.split(" ");
+
+            int firstNum = Integer.parseInt(nums[0]);
+            if(Integer.parseInt(nums[0]) != nums.length - 1){
+                System.out.println("Первое число не совпадает с последующим количеством чисел");
+                inputIsOk = false;
+                continue;
+            }
+
+
+
+        }
+
+//        result = new int[nums.length - 1];
+//        for (int i = 1; i < nums.length; i++) {
+//            result[i - 1] = Integer.parseInt(nums[i]);
+//        }
+
+        return result;
+
+    }
+
+	public static void arrayGrow(int[] ints, int numb){
+        ints = new int[10];
+    }
 
 }
