@@ -1,5 +1,7 @@
 package lesson_04.hw4.item_models;
 
+import java.text.MessageFormat;
+
 import lesson_04.hw4.transport_company_core.Transportable;
 
 public class Elephant implements Transportable{
@@ -34,6 +36,17 @@ public class Elephant implements Transportable{
     @Override
     public double getLength() {
        return length;
+    }
+
+      @Override
+    public String toString() {
+        return  MessageFormat.format(
+            "\n{0}, с габаритами: {1}x{2}x{3}, доставка стоит: {4}", 
+            getClass().getSimpleName(), 
+            getWidth(), 
+            getHight(), 
+            getLength(),
+            costDelivery());
     }
     
 }

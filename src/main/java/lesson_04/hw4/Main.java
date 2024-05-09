@@ -51,7 +51,7 @@ public class Main {
             }
         }   
 
-
+        System.out.println("Список тех кому не нашелся контейнер:");
         System.out.println(itemsWithoutContainer);
 
 
@@ -67,23 +67,10 @@ public class Main {
             }
         }
         System.out.println(
-            MessageFormat.format(
-                "\nСамый дешевый: \n{0}, с габаритами {1}x{2}x{3}, доставка стоит: {4}", 
-                item.getClass().getSimpleName(), 
-                item.getWidth(), 
-                item.getHight(), 
-                item.getLength(),
-                item.costDelivery()));
+            "\nСамый дешевый: " + item.toString());
 
         System.out.println("\nВсе:");
-        list.forEach(i -> System.out.println(
-            MessageFormat.format(
-                "{0}, с габаритами: {1}x{2}x{3}, доставка стоит: {4}", 
-                i.getClass().getSimpleName(), 
-                i.getWidth(), 
-                i.getHight(), 
-                i.getLength(),
-                i.costDelivery())));
+        list.forEach(i -> System.out.println(i));
     }
 
 
