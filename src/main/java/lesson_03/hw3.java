@@ -1,8 +1,7 @@
 package lesson_03;
 
 import java.text.MessageFormat;
-import java.util.Arrays;
-import java.util.Scanner;
+import java.util.*;
 
 public class hw3 {
     public static void main(String[] args) {
@@ -43,6 +42,8 @@ public class hw3 {
 
 
         System.out.println("3 ЗАДАЧА");
+        System.out.println("первый вариант с массивами");
+
 
         int[][] ints1 =
                 {
@@ -51,7 +52,22 @@ public class hw3 {
                         {-8,-6,0,0,7,-29}
                 };
 
+
+        
+
         System.out.println(Arrays.toString(getAveragesInMultidimensionalArray(ints1)));
+
+
+        System.out.println("второй вариант со списком");
+
+        ArrayList<ArrayList<Integer>> list = new ArrayList<>(Arrays.asList(
+            new ArrayList<>(Arrays.asList(10,20,30,40,50)),
+            new ArrayList<>(Arrays.asList(114,10)),
+            new ArrayList<>(Arrays.asList(-8,-6,0,0,7,-29))
+        )
+        );
+
+        System.out.println(getAveragesInMultidimensionalArrayList(list));
 
     }
 
@@ -196,6 +212,23 @@ public class hw3 {
                 count++;
             }
             result[i] = sum/count;
+        }
+
+        return result;
+    }
+
+
+    private static ArrayList<Integer> getAveragesInMultidimensionalArrayList(ArrayList<ArrayList<Integer>> list){
+        ArrayList<Integer> result = new ArrayList<>();
+
+        for (ArrayList<Integer> innerList : list) {
+            int sum = 0;
+            int count = 0;
+            for (int i : innerList) {
+                sum+=i;
+                count++;
+            }
+            result.add(sum/count);
         }
 
         return result;
