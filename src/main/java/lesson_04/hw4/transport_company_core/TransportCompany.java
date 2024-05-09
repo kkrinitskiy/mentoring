@@ -20,14 +20,15 @@ public class TransportCompany {
         }
     }
 
-    public void loadingItem(Transportable item){
+    public boolean loadingItem(Transportable item){
         for (int i = 0; i < emptyConatiners.size(); i++) {
             if(emptyConatiners.get(i).loadingItem(item)){
                 fullConatiners.add(emptyConatiners.get(i));
-                return;
+                return true;
             }
         }
         System.out.println(MessageFormat.format("Не было найдено подходящих контейнеров для {0}", item.getClass().getSimpleName()));
+        return false;
     }
 
     public List<Container> getFullConatiners() {
