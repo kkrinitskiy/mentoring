@@ -7,11 +7,11 @@ import lesson_05.task_41.Item;
 
 public class ContainerShip {
     private final int maxCountContainer;
-    private Hashtable<Integer, Container<? extends Item>> containers;
+    private HashMap<Integer, Container<? extends Item>> containers;
 
     public ContainerShip(int maxCountContainer) {
         this.maxCountContainer = maxCountContainer;
-        containers = new Hashtable<>();
+        containers = new HashMap<>();
     }
     
     public boolean loadContainer(Container<? extends Item> container){
