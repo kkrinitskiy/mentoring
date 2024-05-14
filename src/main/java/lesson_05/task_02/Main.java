@@ -3,6 +3,7 @@ package lesson_05.task_02;
 import java.util.List;
 
 import lesson_05.task_02.exceptions.NoAnimalWithSuchNameException;
+import lesson_05.task_02.exceptions.NoAnimalsInCageException;
 import lesson_05.task_02.model.*;
 
 public class Main {
@@ -37,26 +38,34 @@ public class Main {
         System.out.println(snakeCage2.getAnimalList().size()); // 3 змеи в snakeCage2
         System.out.println(snakeCage2.getAnimalList());
         try{
-        snakeCage2.transferAnimal(snakeCage3, getOldestFromCage(snakeCage2).getName()); // самая старая змея из snakeCage2 уехала в snakeCage3
-        } catch(NoAnimalWithSuchNameException e){
+        snakeCage2.transferAnimal(snakeCage3, snakeCage2.getOldestOne().getName()); // самая старая змея из snakeCage2 уехала в snakeCage3
+        } catch(NoAnimalWithSuchNameException | NoAnimalsInCageException e){
             e.printStackTrace();
         }
         System.out.println(snakeCage2.getAnimalList().size()); // 2 змеи в snakeCage2
 
         try{
-        snakeCage3.transferAnimal(snakeCage2, getYoungestFromCage(snakeCage3).getName());  // самая молодая змея из snakeCage3 уехала в snakeCage2
-        } catch (NoAnimalWithSuchNameException e){
+        snakeCage3.transferAnimal(snakeCage2, snakeCage3.getYoungestOne().getName());  // самая молодая змея из snakeCage3 уехала в snakeCage2
+        } catch (NoAnimalWithSuchNameException | NoAnimalsInCageException e){
             e.printStackTrace();
         }
         System.out.println(snakeCage2.getAnimalList().size()); // снова 3 змеи в snakeCage2
         System.out.println(snakeCage2.getAnimalList()); // задокументирован обмен змей
+
+        // Cage<Snake> cage4 = new Cage<>(10); // пустая клетка
+        // try{
+        //     cage4.getOldestOne();   // выбрасывает исключение
+        // }catch(Exception e){
+        //     e.printStackTrace();
+        }
+
 
 
 
     }
 
     public static <T extends Animal> boolean putAnimalsInCage(Cage<T> cage, List<T> animals){
-        if(cage.freePlaces() - animals.size() >= 0){
+        if(cage.getNumberFreePlaces() - animals.size() >= 0){
             for (T animal : animals){
                 cage.addAnimal(animal);
             }
@@ -66,24 +75,6 @@ public class Main {
 
     }
 
-    public static <T extends Animal> T getOldestFromCage(Cage<T> cage){
-        T t = cage.getAnimalList().get(0);
-        for (T animal : cage.getAnimalList()) {
-            if(animal.getAge() > t.getAge()){
-                t = animal;
-            }
-        }
-        return t;
-    }
-
-    public static <T extends Animal> T getYoungestFromCage(Cage<T> cage){
-        T t = cage.getAnimalList().get(0);
-        for (T animal : cage.getAnimalList()) {
-            if(animal.getAge() < t.getAge()){
-                t = animal;
-            }
-        }
-        return t;
-    }
+   
 
 }

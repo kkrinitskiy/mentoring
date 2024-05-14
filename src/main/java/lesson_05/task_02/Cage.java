@@ -4,9 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lesson_05.task_02.exceptions.NoAnimalWithSuchNameException;
+import lesson_05.task_02.exceptions.NoAnimalsInCageException;
 
-public class Cage<T extends Animal> /*implements Spawnerable<Cage<T>>*/{
-    List<T> placesInCage;
+public class Cage<T extends Animal> {
+    private List<T> placesInCage;
     private int countOfPlacesInCage;
 
     public Cage(int countOfPlacesInCage) {
@@ -41,8 +42,6 @@ public class Cage<T extends Animal> /*implements Spawnerable<Cage<T>>*/{
         return t;
     }
 
-
-
     public boolean transferAnimal(Cage<T> newCage, String name) throws NoAnimalWithSuchNameException{
        T t = takeOutAnimal(name);
        if(newCage.addAnimal(t)){
@@ -55,18 +54,34 @@ public class Cage<T extends Animal> /*implements Spawnerable<Cage<T>>*/{
         return placesInCage;
     }
 
-    public int freePlaces(){
+    public int getNumberFreePlaces(){
         return countOfPlacesInCage - placesInCage.size();
+    }     
+
+    public T getOldestOne() throws NoAnimalsInCageException{
+        if(!placesInCage.isEmpty()){
+            T oldest = placesInCage.get(0);
+            for (T t : placesInCage) {
+                if(t.getAge() > oldest.getAge()){
+                    oldest = t;
+                }
+            }
+            return oldest;
+        }
+        throw new NoAnimalsInCageException("You can't get the OLDEST animal from empty cage!");
     }
 
-    // @Override
-    // public lesson_05.task_02.ArrayList<Cage<T>> spawn() {
-        
-    //     throw new UnsupportedOperationException("Unimplemented method 'spawn'");
-    // }
-
-    
-
-     
+    public T getYoungestOne() throws NoAnimalsInCageException{
+        if(!placesInCage.isEmpty()){
+            T youngest = placesInCage.get(0);
+            for (T t : placesInCage) {
+                if(t.getAge() < youngest.getAge()){
+                    youngest = t;
+                }
+            }
+            return youngest;
+        }
+        throw new NoAnimalsInCageException("You can't get the YOUNGEST animal from empty cage!");
+    }
 
 }
