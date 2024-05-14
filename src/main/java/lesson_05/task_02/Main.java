@@ -8,9 +8,12 @@ import lesson_05.task_02.model.*;
 public class Main {
     public static void main(String[] args) {
         
-        List<Snake> snakes = Snake.spawn(10);
-        List<Bear> bears = Bear.spawn(10);
-        List<Dolphin> dolphins = Dolphin.spawn(10);
+
+        // Для реализации фабричного метода у каждого класса имплементирующего интерфейс Spawnerable
+        // пришлось везде добавить конструктор без параметров, поскольку статические методы не могут наследоваться и переопределяться
+        List<Snake> snakes = new Snake().spawn(10);
+        List<Bear> bears = new Bear().spawn(10);
+        List<Dolphin> dolphins = new Dolphin().spawn(10);
 
         Cage<Snake> snakeCage = new Cage<>(10);
         Cage<Dolphin> dolphinCage = new Cage<>(10);
