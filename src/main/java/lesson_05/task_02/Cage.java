@@ -3,6 +3,8 @@ package lesson_05.task_02;
 import java.util.ArrayList;
 import java.util.List;
 
+import lesson_05.task_02.exceptions.NoAnimalWithSuchNameException;
+
 public class Cage<T extends Animal> {
     List<T> placesInCage;
     private int countOfPlacesInCage;
@@ -24,17 +26,16 @@ public class Cage<T extends Animal> {
        return placesInCage.size() < countOfPlacesInCage;
     }
 
-    public T getAnimalByName(String name){
+    public T getAnimalByName(String name) throws NoAnimalWithSuchNameException{
        for (T t : placesInCage) {
         if(t.getName().equals(name)){
             return t;
         }
        }
-
-       return null;
+       throw new NoAnimalWithSuchNameException(name);
     }
 
-    public T takeOutAnimal(String name){
+    public T takeOutAnimal(String name) throws NoAnimalWithSuchNameException{
         T t = getAnimalByName(name);
         placesInCage.remove(t);
         return t;
@@ -42,7 +43,7 @@ public class Cage<T extends Animal> {
 
 
 
-    public boolean transferAnimal(Cage<T> newCage, String name){
+    public boolean transferAnimal(Cage<T> newCage, String name) throws NoAnimalWithSuchNameException{
        T t = takeOutAnimal(name);
        if(newCage.addAnimal(t)){
         return true;

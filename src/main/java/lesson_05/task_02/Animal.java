@@ -1,9 +1,6 @@
 package lesson_05.task_02;
 
 import java.text.MessageFormat;
-import java.util.ArrayList;
-
-import lesson_05.task_02.model.Snake;
 
 public abstract class Animal {
     private final String name;

@@ -1,13 +1,12 @@
 package lesson_05.task_02;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import lesson_05.task_02.exceptions.NoAnimalWithSuchNameException;
 import lesson_05.task_02.model.*;
 
 public class Main {
     public static void main(String[] args) {
-        int counter = 0;
         
         List<Snake> snakes = Snake.spawn(10);
         List<Bear> bears = Bear.spawn(10);
@@ -43,11 +42,18 @@ public class Main {
         // берем самую старую змею из snakeCage2 и меняем ее местами с самой молодой из snakeCage3
         System.out.println(snakeCage2.getAnimalList().size()); // 3 змеи в snakeCage2
         System.out.println(snakeCage2.getAnimalList());
+        try{
         snakeCage2.transferAnimal(snakeCage3, getOldestFromCage(snakeCage2).getName()); // самая старая змея из snakeCage2 уехала в snakeCage3
+        } catch(NoAnimalWithSuchNameException e){
+            e.printStackTrace();
+        }
         System.out.println(snakeCage2.getAnimalList().size()); // 2 змеи в snakeCage2
 
-
+        try{
         snakeCage3.transferAnimal(snakeCage2, getYoungestFromCage(snakeCage3).getName());  // самая молодая змея из snakeCage3 уехала в snakeCage2
+        } catch (NoAnimalWithSuchNameException e){
+            e.printStackTrace();
+        }
         System.out.println(snakeCage2.getAnimalList().size()); // снова 3 змеи в snakeCage2
         System.out.println(snakeCage2.getAnimalList()); // задокументирован обмен змей
 
