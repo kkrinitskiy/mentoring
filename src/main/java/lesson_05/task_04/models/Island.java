@@ -8,20 +8,23 @@ import lesson_05.task_04.Treasure;
 public class Island {
 
     private final String name;
-    private final Treasure treasure;
+    private final Chest<Treasure> chest;
 
     public Island(String name) {
         this.name = name;
+        this.chest = generateTreasureChest();
+    }
 
+    private Chest<Treasure> generateTreasureChest(){
         int luck = new Random().nextInt(1, 100);
             if(luck <= 33){
-                this.treasure = new Nothing();
+                return new Chest<Treasure>(new Nothing(), this);
             } else if(luck <= 66){
                 int quantity = new Random().nextInt(500, 1000);
-                this.treasure = new Gold(quantity);
+                return new Chest<Treasure>(new Gold(quantity), this);
             } else {
                 int quantity = new Random().nextInt(500, 1000);
-                this.treasure = new Diamonds(quantity);
+                return new Chest<Treasure>(new Diamonds(quantity), this);
             }
     }
 
@@ -37,8 +40,8 @@ public class Island {
         return name;
     }
 
-    public Treasure getTreasure() {
-        return treasure;
+    public Chest<? extends Treasure> getChest() {
+        return chest;
     }
 
 }

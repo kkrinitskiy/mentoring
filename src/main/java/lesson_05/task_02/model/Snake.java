@@ -6,7 +6,7 @@ import lesson_05.task_02.Animal;
 import lesson_05.task_02.Spawnerable;
 
 
-public class Snake extends Animal implements Spawnerable {
+public class Snake extends Animal implements Spawnerable<Snake> {
 
     public Snake(String name, int age) {
         super(name, age);

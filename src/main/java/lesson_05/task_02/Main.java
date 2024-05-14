@@ -57,7 +57,7 @@ public class Main {
         //     cage4.getOldestOne();   // выбрасывает исключение
         // }catch(Exception e){
         //     e.printStackTrace();
-        }
+        // }
 
 
 

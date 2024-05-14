@@ -3,8 +3,8 @@ package lesson_05.task_04;
 import java.text.MessageFormat;
 import java.util.List;
 
-import lesson_05.task_04.models.Gold;
 import lesson_05.task_04.models.Island;
+import lesson_05.task_04.models.Nothing;
 import lesson_05.task_04.models.TreasureMap;
 
 public class Main {
@@ -21,19 +21,9 @@ public class Main {
         for (Island island : islands) {
 
             if(island.getName().equalsIgnoreCase(map.getIslandName())){
-
-                if(!island.getTreasure().isEmpty()){
-                    System.out.println(MessageFormat.format("На острове \"{0}\" найден сундук, " +
-                    "содержащий в себе {1}, в количестве {2}, на общую стоимость в {3}",
-                    map.getIslandName(),
-                    island.getTreasure().getClass().getSimpleName(),
-                    island.getTreasure().getQuantity(),
-                    island.getTreasure().getPrice()));
-                    return;
-                } else {
-                    System.out.println("Сундук оказался пуст!");
-                    return;
-                }
+                System.out.println(island.getChest());
+                return;
+                
             }
         }
 
@@ -44,7 +34,7 @@ public class Main {
         StringBuilder sb = new StringBuilder();
 
         for (Island island : islands) {
-            if(island.getTreasure().isEmpty()){
+            if(island.getChest().checkChest().equals(Nothing.class)){
                 sb.append(MessageFormat.format("\"{0}\", ",island.getName()));
             }
         }
@@ -59,15 +49,10 @@ public class Main {
     public static void printExpencivestTreasure(List<Island> islands){
         Island islandWithExpenciveTreasure = islands.get(0);
         for (int i = 1; i < islands.size(); i++) {
-            if(islandWithExpenciveTreasure.getTreasure().getPrice() < islands.get(i).getTreasure().getPrice()){
+            if(islandWithExpenciveTreasure.getChest().takeTreasure().getPrice() < islands.get(i).getChest().takeTreasure().getPrice()){
                 islandWithExpenciveTreasure = islands.get(i);
             }
         }
-        System.out.println(MessageFormat.format("Самые богатые сокровища находились на острове \"{0}\". " + 
-        " Сундук содержал {1}, в количестве {2}, на общую сумму в {3}", 
-        islandWithExpenciveTreasure.getName(),
-        islandWithExpenciveTreasure.getTreasure().getClass().getSimpleName(),
-        islandWithExpenciveTreasure.getTreasure().getQuantity(),
-        islandWithExpenciveTreasure.getTreasure().getPrice()));
+        System.out.println(islandWithExpenciveTreasure.getChest());
     }
 }
