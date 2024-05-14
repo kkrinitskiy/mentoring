@@ -55,6 +55,10 @@ public class Cage<T extends Animal> /*implements Spawnerable<Cage<T>>*/{
         return placesInCage;
     }
 
+    public int freePlaces(){
+        return countOfPlacesInCage - placesInCage.size();
+    }
+
     // @Override
     // public lesson_05.task_02.ArrayList<Cage<T>> spawn() {
         

@@ -12,25 +12,16 @@ public class Main {
         // Для реализации фабричного метода у каждого класса имплементирующего интерфейс Spawnerable
         // пришлось везде добавить конструктор без параметров, поскольку статические методы не могут наследоваться и переопределяться
         List<Snake> snakes = new Snake().spawn(10);
-        List<Bear> bears = new Bear().spawn(10);
         List<Dolphin> dolphins = new Dolphin().spawn(10);
+        List<Bear> bears = new Bear().spawn(10);
 
         Cage<Snake> snakeCage = new Cage<>(10);
         Cage<Dolphin> dolphinCage = new Cage<>(10);
         Cage<Bear> bearCage = new Cage<>(10);
 
-        for (Snake snake : snakes) {
-            snakeCage.addAnimal(snake);
-        }
-
-        for (Dolphin dolphin : dolphins) {
-            dolphinCage.addAnimal(dolphin);
-        }
-
-        for (Bear bear : bears) {
-            bearCage.addAnimal(bear);
-        }
-
+        putAnimalsInCage(snakeCage, snakes);
+        putAnimalsInCage(dolphinCage, dolphins);
+        putAnimalsInCage(bearCage, bears);
         
         Cage<Snake> snakeCage2 = new Cage<>(4);
         snakeCage2.addAnimal(new Snake("OldestSnake", 99));
@@ -61,6 +52,17 @@ public class Main {
         System.out.println(snakeCage2.getAnimalList()); // задокументирован обмен змей
 
 
+
+    }
+
+    public static <T extends Animal> boolean putAnimalsInCage(Cage<T> cage, List<T> animals){
+        if(cage.freePlaces() - animals.size() >= 0){
+            for (T animal : animals){
+                cage.addAnimal(animal);
+            }
+            return true;
+        }
+        return false;
 
     }
 
