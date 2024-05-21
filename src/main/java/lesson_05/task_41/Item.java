@@ -33,6 +33,14 @@ public abstract class Item {
         return height;
     }
 
-   
-    
+    @Override
+    public String toString() {
+        return this.getClass().getSimpleName() + " {\n\t\t" +
+                "width = " + width +
+                ", length = " + length +
+                ", height = " + height +
+                ", volume = " + getVolume() +
+                "\n\t\t}";
+    }
+
 }

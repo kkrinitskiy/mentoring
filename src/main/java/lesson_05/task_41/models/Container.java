@@ -16,12 +16,14 @@
             this(1,1,1);
         }
         
-        public boolean loadItem(T itemToLoad){
-            if(canFit(itemToLoad)){
+        public void loadItem(T itemToLoad){
+            if(canFit(itemToLoad) && isEmpty()){
                 this.item = itemToLoad;
-                return true;
             }
-            return false;
+        }
+
+        public boolean isEmpty(){
+            return this.item == null;
         }
 
         public T unloadItem(){
@@ -53,4 +55,20 @@
                    itemDimensions[1] <= containerDimensions[1] &&
                    itemDimensions[0] <= containerDimensions[0];
         }
+
+        public Item checkItem(){
+            return item;
+        }
+
+        @Override
+        public String toString() {
+            if(item != null) {
+                return "Container{\n\t" +
+                        "item = " + item +
+                        "\n\t}";
+            }else {
+                return "Container{Empty}";
+            }
+        }
+
     }

@@ -20,7 +20,7 @@ public class Main {
         List<Container<Car>> carContainers = new Container<Car>().factory(5, 200, 500, 200);
         List<Container<Boat>> boatContainers = new Container<Boat>().factory(5, 200, 500, 200);
 
-        putItemsIntoContainers(carContainers, Car.factory(3, "sdfsdf", "sdfsdfds", 200, 300, 100));
+        putItemsIntoContainers(carContainers, Car.factory(3, "smallest", "smallest", 10, 10, 2));
         carContainers.get(3).loadItem(new Car("first", "first", 200, 500, 200));
         carContainers.get(4).loadItem(new Car("second", "second", 200, 450, 200));
 
@@ -31,7 +31,39 @@ public class Main {
         loadContainersOnShip(cs, carContainers);
         loadContainersOnShip(cs, boatContainers);
 
-        cs.getContainersListSortedByVolume(4).forEach(c -> {System.out.println(c.getItemVolume());});
+       /*
+        *  1. Выведите 4 контейнера с самыми большим объектами внутри
+        */
+        System.out.println("\n4 контейнера с самыми большим объектами внутри:\n");
+        for (Container<? extends Item> container : cs.getContainersListSortedByVolume(4)) {
+            System.out.println(container);
+        }
+
+        /*
+         *  2. Найдите контейнер, у которого загружен самый маленький объект
+         */
+        System.out.println("\nконтейнер, у которого загружен самый маленький объект:\n");
+        System.out.println(cs.getContainerWithSmallestItem());
+
+
+        /*
+         *  3. Выгрузите два контейнера и поменяйте местами их содержимое
+         */
+
+        System.out.println("\nВыгружаем два контейнера и меняем местами их содержимое:\n");
+
+        try {
+            System.out.println("контейнер 1:" + cs.getContainerByNumber(1));
+            System.out.println("контейнер 3:" + cs.getContainerByNumber(3));
+
+            cs.unloadItemsAndSwap(1, 3);
+
+            System.out.println("контейнер 1:" + cs.getContainerByNumber(1));
+            System.out.println("контейнер 3:" + cs.getContainerByNumber(3));
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
 
