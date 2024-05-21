@@ -1,4 +1,4 @@
-package lesson_04.hw4.transport_company_core;
+package lesson_04.transport_company_core;
 
 import java.text.MessageFormat;
 

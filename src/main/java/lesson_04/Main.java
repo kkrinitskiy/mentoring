@@ -1,21 +1,25 @@
-package lesson_04.hw4;
+package lesson_04;
 
 import java.util.ArrayList;
 
-import lesson_04.hw4.item_models.*;
-import lesson_04.hw4.transport_company_core.*;
+import lesson_04.item_models.*;
+import lesson_04.transport_company_core.*;
+import lesson_04.item_models.Car;
+import lesson_04.item_models.Elephant;
+import lesson_04.item_models.Panzer;
+import lesson_04.transport_company_core.TransportCompany;
+import lesson_04.transport_company_core.Transportable;
 
-import java.text.MessageFormat;
 import java.util.*;
 
-import static lesson_04.hw4.transport_company_core.Tax.*;
+import static lesson_04.transport_company_core.Tax.*;
 
 public class Main {
     public static void main(String[] args) {
 
         TransportCompany yandexDostavka = new TransportCompany(10);
 
-        List<Transportable> items = new ArrayList<>(); 
+        List<Transportable> items = new ArrayList<>();
         List<Transportable> itemsWithoutContainer = new ArrayList<>();
 
         Car car_00 = new Car(HWUtils.getRandomWidth(), HWUtils.getRandomHight(), HWUtils.getRandomLength(), CAR.getRate());

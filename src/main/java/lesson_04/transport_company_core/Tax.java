@@ -1,4 +1,4 @@
-package lesson_04.hw4.transport_company_core;
+package lesson_04.transport_company_core;
 
 public enum Tax {
     ANIMAL(3.6), WEAPON(2.9), CAR(2.4);
