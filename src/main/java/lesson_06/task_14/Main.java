@@ -1,15 +1,20 @@
 package lesson_06.task_14;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
+import java.util.*;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println(Character.compare('ы','ы'));
-        ArrayList<String> a = new ArrayList<>();
-//        a.removeIf(a -> a.equalsIgnoreCase(""))
+//        int count = new Scanner(System.in).nextInt();
+        int count = 10;
+        ArrayList<Integer> sequence = IntStream.iterate(1, a -> a*2)
+                .limit(count)
+                .boxed()
+                .collect(Collectors.toCollection(ArrayList::new));
+        System.out.println(sequence);
+
     }
 }

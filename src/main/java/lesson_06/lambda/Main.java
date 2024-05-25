@@ -1,7 +1,14 @@
 package lesson_06.lambda;
 
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
+import java.util.function.BinaryOperator;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
+import java.util.function.UnaryOperator;
+import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
@@ -144,9 +151,23 @@ public class Main {
                 new HighTemp(31)
         };
 
-        HighTemp highTemp = new HighTemp(28);
+//        HighTemp highTemp = new HighTemp(28);
+//
+//        System.out.println(counter(weekDayHighs, HighTemp::lessThanTemp, highTemp));
+//
+//
+//        MyConstr mc = HighTemp::new;
+//
+//        Predicate<String> startsWithA = str -> str.startsWith("a");
+//        List<String> words = Arrays.asList("apple", "banana", "apricot", "orange");
+//
+//        List<String> filtered = words.stream().filter(startsWithA).toList();
+//
+//        Consumer<String> str = System.out::println;
+//
+//        BinaryOperator<Integer> sum = (x, y) -> x + y;
 
-        System.out.println(counter(weekDayHighs, HighTemp::lessThanTemp, highTemp));
+
 
 
     }
@@ -185,9 +206,6 @@ public class Main {
         return count;
     }
 
-    MyConstr mc = HighTemp::new;
-
-    HighTemp highTemp = mc.func(30);
 
 
 }
