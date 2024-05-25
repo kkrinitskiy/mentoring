@@ -185,5 +185,9 @@ public class Main {
         return count;
     }
 
+    MyConstr mc = HighTemp::new;
+
+    HighTemp highTemp = mc.func(30);
+
 
 }
