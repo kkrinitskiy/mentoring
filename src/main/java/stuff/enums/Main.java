@@ -1,4 +1,4 @@
-package lesson_06.enums;
+package stuff.enums;
 
 import java.util.Scanner;
 
@@ -14,7 +14,10 @@ public class Main {
         for (Operation op : Operation.values()){
             System.out.printf("%f %s %f = %f%n", x, op, y, op.apply(x, y));
         }
+
+        Month april = Month.APRIL;
     }
+
 
 
 }

@@ -1,4 +1,4 @@
-package lesson_06.lambda;
+package stuff.lambda;
 
 public interface DoubleNumericArrayFunc {
     double func(double[] n) throws EmptyArrayException;

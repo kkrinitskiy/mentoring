@@ -1,4 +1,4 @@
-package lesson_06.enums;
+package stuff.enums;
 
 public enum Orange {
     NAVEL, TEMPLE, BLOOD

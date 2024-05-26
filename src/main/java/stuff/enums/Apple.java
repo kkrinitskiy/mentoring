@@ -1,4 +1,4 @@
-package lesson_06.enums;
+package stuff.enums;
 
 public enum Apple {
     FUJI, PIPPIN, GRANNY_SMITH

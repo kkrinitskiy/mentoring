@@ -1,4 +1,4 @@
-package lesson_06.anonClass;
+package stuff.anonClass;
 
 
 //## Задание: "Фабрика эмоций"

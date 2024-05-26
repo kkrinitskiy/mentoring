@@ -1,4 +1,4 @@
-package lesson_06.enums;
+package stuff.enums;
 
 import java.util.function.DoubleBinaryOperator;
 

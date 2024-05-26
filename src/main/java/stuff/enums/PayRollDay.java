@@ -1,4 +1,4 @@
-package lesson_06.enums;
+package stuff.enums;
 
 public enum PayRollDay {
     MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY;
