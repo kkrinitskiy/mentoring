@@ -1,7 +1,4 @@
-package stuff.patterns.observer.displays;
-
-import stuff.patterns.observer.PacketWeatherData;
-import stuff.patterns.observer.WeatherData;
+package stuff.patterns.observer.with_native_instruments.displays;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
