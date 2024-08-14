@@ -64,7 +64,7 @@ public class Main {
                 e.printStackTrace();
             }
         }
-
+        new Thread().start();
         System.out.println("Победитель: " + RacingCar.winner);
 
     }
