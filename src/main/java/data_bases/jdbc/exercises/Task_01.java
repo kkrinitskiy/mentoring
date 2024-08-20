@@ -1,10 +1,8 @@
 package data_bases.jdbc.exercises;
 
-import data_bases.jdbc.DockerPostgresContainer;
+import data_bases.DockerPostgresContainer;
 import java.sql.*;
-import java.time.Instant;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 public class Task_01 {
     public static void main(String[] args) {

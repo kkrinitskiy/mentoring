@@ -1,4 +1,4 @@
-package data_bases.jdbc;
+package data_bases;
 
 import com.github.dockerjava.api.DockerClient;
 import com.github.dockerjava.api.model.ExposedPort;
@@ -12,20 +12,20 @@ import java.util.concurrent.TimeUnit;
 
 public class DockerPostgresContainer {
 
-    public static final String url = "jdbc:postgresql://localhost:5432/";
+    public static final String URL = "jdbc:postgresql://localhost:5432/";
 
-    public static final String user = "psql_user";
-    public static final String password = "111111";
-    public static final String db_name = "db_name";
+    public static final String USERNAME = "psql_user";
+    public static final String PASSWORD = "111111";
+    public static final String DB_NAME = "db_name";
 
 
     public static final String databaseCommand = "postgres";
     public static final String containerName = "jdbc_postgres";
     public static final ExposedPort tcp5432 = ExposedPort.tcp(5432);
     public static final List<String> envs = List.of(
-            "POSTGRES_USER=" + user,
-            "POSTGRES_PASSWORD=" + password,
-            "POSTGRES_DB=" + db_name
+            "POSTGRES_USER=" + USERNAME,
+            "POSTGRES_PASSWORD=" + PASSWORD,
+            "POSTGRES_DB=" + DB_NAME
     );
 
     public static void init() {
@@ -57,7 +57,7 @@ public class DockerPostgresContainer {
         if(checkContainerIsExited(client)) {
             System.out.println(", но был остановлен. Запускаем");
             client.startContainerCmd(containerName).exec();
-            TimeUnit.MILLISECONDS.sleep(100);
+            TimeUnit.MILLISECONDS.sleep(200);
             System.out.println("Контейнер готов");
             return;
         }
@@ -68,6 +68,9 @@ public class DockerPostgresContainer {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+
+
+
     }
 
     private static boolean checkContainerExists(DockerClient client) {
