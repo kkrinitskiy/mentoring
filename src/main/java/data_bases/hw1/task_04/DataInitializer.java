@@ -1,31 +1,31 @@
-package data_bases.hw1.task_03;
+package data_bases.hw1.task_04;
 
 import java.sql.*;
 import java.util.Random;
 
 import static data_bases.DockerPostgresContainer.*;
-import static data_bases.DockerPostgresContainer.PASSWORD;
 
 class DataInitializer {
 
+    private static Random random = new Random();
     private static String addHuman = "insert into humans_v2(name, surname, patronymic, age, passport_number, position_id) values(?,?,?,?,?,?)";
     private static String addPosition = "insert into positions(position_name) values(?)";
 
+    private static String[] positions = new String[]{"Механик", "Медбрат", "Java-разработчик", "Метролог", "Чиновник", "Безработный"};
     private static Human[] humans = new Human[]{
-            new Human("Николай", "Арсеньтьевич", "Больжедор", 55),
-            new Human("Зигфрид", "Эльдарович", "Куролесов", 42),
-            new Human("Аделаида", "Прокофьевна", "Шнырь", 63),
-            new Human("Ермолай", "Вольдемарович", "Пупкин", 38),
-            new Human("Глафира", "Феоктистовна", "Цапля", 71),
-            new Human("Спиридон", "Амвросиевич", "Жмых", 50),
-            new Human("Капитолина", "Эрнестовна", "Пышка", 29),
-            new Human("Фаддей", "Никифорович", "Пузырь", 67),
-            new Human("Ефросинья", "Велимировна", "Коржик", 45),
-            new Human("Пантелеймон", "Феофанович", "Бубликов", 58)
+            new Human(-1,"Николай", "Арсеньтьевич", "Больжедор", 55, random.nextInt(100_000, 999_999), null),
+            new Human(-1,"Зигфрид", "Эльдарович", "Куролесов", 42, random.nextInt(100_000, 999_999), null),
+            new Human(-1, "Аделаида", "Прокофьевна", "Шнырь", 63, random.nextInt(100_000, 999_999), null),
+            new Human(-1, "Ермолай", "Вольдемарович", "Пупкин", 38, random.nextInt(100_000, 999_999), null),
+            new Human(-1, "Глафира", "Феоктистовна", "Цапля", 71, random.nextInt(100_000, 999_999), null),
+            new Human(-1, "Спиридон", "Амвросиевич", "Жмых", 50, random.nextInt(100_000, 999_999), null),
+            new Human(-1, "Капитолина", "Эрнестовна", "Пышка", 29, random.nextInt(100_000, 999_999), null),
+            new Human(-1, "Фаддей", "Никифорович", "Пузырь", 67, random.nextInt(100_000, 999_999), null),
+            new Human(-1, "Ефросинья", "Велимировна", "Коржик", 45, random.nextInt(100_000, 999_999), null),
+            new Human(-1, "Пантелеймон", "Феофанович", "Бубликов", 58, random.nextInt(100_000, 999_999), null)
     };
 
-    private static String[] positions = new String[]{"Механик", "Медбрат", "Java-разработчик", "Метролог", "Чиновник", "Безработный"};
-    
+
     public static void run(){
         try(Connection connection = DriverManager.getConnection(URL + DB_NAME, USERNAME, PASSWORD)){
 
@@ -55,7 +55,7 @@ class DataInitializer {
                 statementToAddHumans.setString(2, human.surname());
                 statementToAddHumans.setString(3, human.patronymic());
                 statementToAddHumans.setInt(4, human.age());
-                statementToAddHumans.setInt(5, new Random().nextInt(100_000, 999_999));
+                statementToAddHumans.setInt(5, human.passportNumber());
                 statementToAddHumans.setInt(6, new Random().nextInt(1, positions.length + 1));
                 statementToAddHumans.addBatch();
             }
@@ -81,5 +81,4 @@ class DataInitializer {
 
     }
 
-    record Human(String name, String surname, String patronymic, int age){}
 }

@@ -4,7 +4,7 @@ import java.sql.*;
 
 import static data_bases.DockerPostgresContainer.*;
 
-public class Task_02 {
+class Task_02 {
     public static void main(String[] args) {
         HumansDataBase humansDataBase = new HumansDataBase(URL + DB_NAME, USERNAME, PASSWORD);
         humansDataBase.printAllHuman();
