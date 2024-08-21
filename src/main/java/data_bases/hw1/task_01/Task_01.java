@@ -1,4 +1,4 @@
-package data_bases.hw1.Task_01;
+package data_bases.hw1.task_01;
 
 import java.sql.*;
 
