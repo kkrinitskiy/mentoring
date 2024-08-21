@@ -5,7 +5,7 @@ import java.sql.*;
 import static data_bases.DockerPostgresContainer.*;
 
 
-public class Task_01 {
+class Task_01 {
 
     private static String addHuman = "insert into humans(\"Имя\",\"Фамилия\",\"Отчество\",\"Возраст\") values(?,?,?,?)";
     private static Human[] humans = new Human[]{

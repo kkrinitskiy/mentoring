@@ -2,7 +2,7 @@ package data_bases.hw1.task_03;
 
 import static data_bases.DockerPostgresContainer.*;
 
-public class Main {
+class Main {
     public static void main(String[] args) {
         System.out.println("########### ИНИЦАЛИЗАЦИЯ ДАННЫХ ###########");
         DataInitializer.run();

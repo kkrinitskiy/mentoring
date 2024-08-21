@@ -1,6 +1,8 @@
-package data_bases.hw1.task_03;
+package data_bases.hw1.task_04;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 class HumanDatabase {
 
@@ -22,80 +24,47 @@ class HumanDatabase {
     }
 
 
-    /**
-     * Выводим в консоль всех людей из таблицы
-     */
-    public void printAllHuman(){
+    public List<Human> getAllHumans(){
         try(Connection connection = DriverManager.getConnection(url, username, password)){
-
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(SQL_HUMANS_SELECT_ALL);
+            List<Human> result = new ArrayList<>();
 
             while (resultSet.next()) {
-                printHumanInfo(resultSet);
+                result.add(mapResultSetToHuman(resultSet));
             }
 
+            return result;
         }catch (SQLException e){
             throw new RuntimeException(e);
         }
     }
 
 
-    /**
-     *  Добавляем людей в таблицу
-     *  
-     * @param name
-     * @param surname
-     * @param patronymic
-     * @param age
-     * @param passport
-     * @param positionName
-     */
-    public void addHuman(String name, String surname, String patronymic, int age, int passport, String positionName){
+    public void addHuman(Human human){
         try(Connection connection = DriverManager.getConnection(url, username, password)){
 
             PreparedStatement preparedStatement = connection.prepareStatement(SQL_HUMANS_INSERT);
             try {
-
-                // ищем пользователя, если не находим - бросаем исключение
-                int positionId = findPositionIdByName(connection, positionName);
-
-                executePreparedStatement(preparedStatement, name, surname, patronymic, age, passport, positionId);
+                executePreparedStatement(preparedStatement, human);
             } catch (SQLException e) {
-
                 // если должность не найдена в таблице, то создаем ее
-                // Statement.RETURN_GENERATED_KEYS позволяет сразу получить нам id созданной записи
-                PreparedStatement addPosition = connection.prepareStatement(SQL_POSITIONS_INSERT, Statement.RETURN_GENERATED_KEYS);
-                addPosition.setString(1, positionName);
+                PreparedStatement addPosition = connection.prepareStatement(SQL_POSITIONS_INSERT);
+                addPosition.setString(1, human.positionName());
                 addPosition.executeUpdate();
-
-                // полученный id передаем вместе с остальными данными в sql запрос и создаем запись в таблице
-                ResultSet generatedKeys = addPosition.getGeneratedKeys();
-                if (generatedKeys.next()) {
-                    executePreparedStatement(preparedStatement, name, surname, patronymic, age, passport, generatedKeys.getInt(1));
-                }
+                executePreparedStatement(preparedStatement, human);
             }
         }catch (SQLException e){
             throw new RuntimeException(e);
         }
     }
 
-    /**
-     *  Удаляем человека из таблицы
-     *  
-     * @param name
-     * @param surname
-     * @param patronymic
-     * @param age
-     * @param passportNumber
-     * @param positionName
-     */
-    public void deleteHuman(String name, String surname, String patronymic, int age, int passportNumber, String positionName){
+
+    public void deleteHuman(Human human){
         try(Connection connection = DriverManager.getConnection(url, username, password)){
-            int positionId = findPositionIdByName(connection, positionName);
             PreparedStatement preparedStatement = connection
                     .prepareStatement(SQL_HUMANS_DELETE);
-            executePreparedStatement(preparedStatement, name, surname, patronymic, age, passportNumber, positionId);
+            executePreparedStatement(preparedStatement, human);
         }catch (SQLException e){
             throw new RuntimeException(e);
         }
@@ -122,28 +91,33 @@ class HumanDatabase {
         throw new SQLException("Должность " + position + " не найдена");
     }
 
-    private void executePreparedStatement(PreparedStatement preparedStatement, String name, String surname, String patronymic, int age, int passport, int positionId) throws SQLException {
-        preparedStatement.setString(1, name);
-        preparedStatement.setString(2, surname);
-        preparedStatement.setString(3, patronymic);
-        preparedStatement.setInt(4, age);
-        preparedStatement.setInt(5, passport);
+    private void executePreparedStatement(PreparedStatement preparedStatement, Human human) throws SQLException {
+        int positionId = findPositionIdByName(preparedStatement.getConnection(), human.positionName());
+        preparedStatement.setString(1, human.name());
+        preparedStatement.setString(2, human.surname());
+        preparedStatement.setString(3, human.patronymic());
+        preparedStatement.setInt(4, human.age());
+        preparedStatement.setInt(5, human.passportNumber());
         preparedStatement.setInt(6, positionId);
         preparedStatement.executeUpdate();
     }
 
-    private void printHumanInfo(ResultSet resultSet) throws SQLException {
+    private Human mapResultSetToHuman(ResultSet resultSet) throws SQLException {
         int id = resultSet.getInt(1);
         String name = resultSet.getString(2);
         String surname = resultSet.getString(3);
         String patronymic = resultSet.getString(4);
         int age = resultSet.getInt(5);
-        int passport = resultSet.getInt(6);
-        String position = resultSet.getString(7);
+        int passportNumber = resultSet.getInt(6);
+        String positionName = resultSet.getString(7);
 
-        System.out.println(id + " " + name + " " + surname + " " + patronymic + " " + age + " " + passport + " " + position);
+        return new Human(id, name, surname, patronymic, age, passportNumber, positionName);
     }
-    
-    
 
+    public void injectSql(String sql) throws SQLException {
+        try(Connection connection = DriverManager.getConnection(url, username, password)){
+            Statement statement = connection.createStatement();
+            statement.executeUpdate(sql);
+        }
+    }
 }
