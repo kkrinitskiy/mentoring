@@ -1,4 +1,4 @@
-package data_bases.hibernate;
+package stuff.hibernate.userAndCommentDao;
 
 import jakarta.persistence.*;
 import lombok.Data;

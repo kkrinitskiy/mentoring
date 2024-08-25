@@ -1,4 +1,4 @@
-package data_bases.hibernate;
+package stuff.hibernate.userAndCommentDao;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -12,33 +12,51 @@ public class CommentDao {
         this.sessionFactory = sessionFactory;
     }
 
-    void addComment(Comment comment) {
+    boolean addComment(Comment comment) {
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             session.persist(comment);
             session.getTransaction().commit();
+            return true;
+        }catch (Exception e) {
+            return false;
         }
     }
 
-    void updateComment(Comment comment) {
+    boolean updateComment(Comment comment) {
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             session.merge(comment);
             session.getTransaction().commit();
+            return true;
+        }catch (Exception e) {
+            return false;
         }
     }
 
-    void deleteComment(Comment comment) {
+    boolean deleteComment(Comment comment) {
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             session.remove(comment);
             session.getTransaction().commit();
+            return true;
+        }catch (Exception e) {
+            return false;
         }
     }
 
     List<Comment> getAllComments() {
         try (Session session = sessionFactory.openSession()) {
             return session.createQuery("from Comment", Comment.class).list();
+        }
+    }
+
+    List<Comment> getCommentsByUserId(User user) {
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            return session.createQuery("from Comment where user.id = :userId", Comment.class)
+                    .setParameter("userId", user.getId())
+                    .list();
         }
     }
 }

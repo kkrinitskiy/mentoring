@@ -1,4 +1,4 @@
-package data_bases.hibernate;
+package stuff.hibernate.userAndCommentDao;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -32,6 +32,12 @@ public class Main {
 
         userDao.getAllUsers().forEach(System.out::println);
         commentDao.getAllComments().forEach(System.out::println);
+        User user = userDao.getYoungestUser();
+        System.out.println(user);
+        System.out.println(commentDao.getCommentsByUserId(users.get(5)));
+        System.out.println(userDao.getFirstCountUsersFromStart(1));
+        userDao.getFirstCountUsersFromStart(5).forEach(System.out::println);
+
 
     }
 

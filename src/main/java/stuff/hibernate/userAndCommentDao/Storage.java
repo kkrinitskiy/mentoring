@@ -1,4 +1,4 @@
-package data_bases.hibernate;
+package stuff.hibernate.userAndCommentDao;
 
 import java.sql.Date;
 import java.time.LocalDateTime;
