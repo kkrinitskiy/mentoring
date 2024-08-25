@@ -1,4 +1,4 @@
-package stuff.patterns.observer;
+package stuff.patterns.observer.with_native_instruments.displays;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;

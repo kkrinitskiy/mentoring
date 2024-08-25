@@ -1,8 +1,4 @@
-package stuff.patterns.observer;
-
-import stuff.patterns.observer.displays.*;
-
-import java.beans.PropertyChangeSupport;
+package stuff.patterns.observer.with_native_instruments.displays;
 
 public class WeatherStation {
     public static void main(String[] args) {
