@@ -32,10 +32,7 @@ public class EmployeeTask {
 
     private Date deadline;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(name = "employee_task",
-            joinColumns = @JoinColumn(name = "task_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "employee_id", referencedColumnName = "id"))
+    @ManyToMany(mappedBy = "tasks")
     private Set<Employee> employees =  new HashSet<>();
 
     // Переопределяем hashCode

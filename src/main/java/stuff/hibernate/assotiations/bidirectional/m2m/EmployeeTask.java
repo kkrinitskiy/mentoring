@@ -1,25 +1,28 @@
-package stuff.hibernate.employees.models;
+package stuff.hibernate.assotiations.bidirectional.m2m;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 
-@AllArgsConstructor
-@NoArgsConstructor
+@Builder
 @Data
 @Entity
 @Table(name = "task")
-public class EmployeeTask {
+@NoArgsConstructor
+@AllArgsConstructor
+class EmployeeTask {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column(name = "name")
     private String description;
-    @ManyToOne
-    @JoinColumn(name = "employee_id")
-    private Employee employee;
+    @ManyToMany(mappedBy = "tasks")
+    private List<Employee> employees;
     private Date deadline;
+
 }
