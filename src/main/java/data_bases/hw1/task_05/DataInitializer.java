@@ -24,8 +24,8 @@ class DataInitializer {
     private static String SQL_HUMAN_INSERT = "insert into humans_v3(name, surname, patronymic, age, cat_id, dog_id) values(?,?,?,?,?,?)";
 
 
-    public static void run(){
-        try(Connection connection = DriverManager.getConnection(URL + DB_NAME, USERNAME, PASSWORD)) {
+    public static void run() {
+        try (Connection connection = DriverManager.getConnection(URL + DB_NAME, USERNAME, PASSWORD)) {
 
             Statement statement = connection.createStatement();
 
@@ -44,25 +44,25 @@ class DataInitializer {
             fillDataHumansTable();
 
 
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 
     }
 
     private static void fillDataCatsTable() throws SQLException {
-        cats.add(getCat("Мурзик", 3, "Персидская", "Белый"));
-        cats.add(getCat("Барсик", 5, "Сиамская", "Серый"));
-        cats.add(getCat("Том", 2, "Британская", "Черный"));
-        cats.add(getCat("Симба", 4, "Мейн-кун", "Оранжевый"));
-        cats.add(getCat("Луна", 1, "Шотландская", "Серый"));
-        cats.add(getCat("Котя", 7, "Русская голубая", "Синий"));
-        cats.add(getCat("Нюся", 3, "Абиссинская", "Кремовый"));
-        cats.add(getCat("Милашка", 6, "Бенгальская", "Коричневый"));
-        cats.add(getCat("Рысь", 2, "Сфинкс", "Розовый"));
-        cats.add(getCat("Снежок", 8, "Балийская", "Белый"));
+        cats.add(Cat.builder().name("Мурзик").age(3).breed("Персидская").color("Белый").build());
+        cats.add(Cat.builder().name("Барсик").age(5).breed("Сиамская").color("Серый").build());
+        cats.add(Cat.builder().name("Том").age(2).breed("Британская").color("Черный").build());
+        cats.add(Cat.builder().name("Симба").age(4).breed("Мейн-кун").color("Оранжевый").build());
+        cats.add(Cat.builder().name("Луна").age(1).breed("Шотландская").color("Серый").build());
+        cats.add(Cat.builder().name("Котя").age(7).breed("Русская голубая").color("Синий").build());
+        cats.add(Cat.builder().name("Нюся").age(3).breed("Абиссинская").color("Кремовый").build());
+        cats.add(Cat.builder().name("Милашка").age(6).breed("Бенгальская").color("Коричневый").build());
+        cats.add(Cat.builder().name("Рысь").age(2).breed("Сфинкс").color("Розовый").build());
+        cats.add(Cat.builder().name("Снежок").age(8).breed("Балийская").color("Белый").build());
 
-        try(Connection connection = DriverManager.getConnection(URL + DB_NAME, USERNAME, PASSWORD)){
+        try (Connection connection = DriverManager.getConnection(URL + DB_NAME, USERNAME, PASSWORD)) {
             PreparedStatement preparedStatement = connection.prepareStatement(SQL_CAT_INSERT);
             for (Cat cat : cats) {
                 preparedStatement.setString(1, cat.getName());
@@ -73,33 +73,25 @@ class DataInitializer {
             }
             preparedStatement.executeBatch();
 
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    private static Cat getCat(String name, int age, String breed, String color){
-        Cat cat = new Cat();
-        cat.setName(name);
-        cat.setAge(age);
-        cat.setBreed(breed);
-        cat.setColor(color);
-        return cat;
-    }
 
     private static void fillDataDogsTable() throws SQLException {
-        dogs.add(getDog("Шарик", 4, "Лабрадор", "Черный"));
-        dogs.add(getDog("Дружок", 3, "Бульдог", "Бежевый"));
-        dogs.add(getDog("Рекс", 5, "Немецкая овчарка", "Черный"));
-        dogs.add(getDog("Тузик", 2, "Сибирский хаски", "Серый"));
-        dogs.add(getDog("Малышка", 1, "Йоркширский терьер", "Кремовый"));
-        dogs.add(getDog("Бобик", 7, "Кокер-спаниель", "Рыжий"));
-        dogs.add(getDog("Грей", 6, "Бордер-колли", "Чёрный с белым"));
-        dogs.add(getDog("Лаки", 3, "Пудель", "Белый"));
-        dogs.add(getDog("Сэм", 2, "Австралийская овчарка", "Коричневый"));
-        dogs.add(getDog("Чарли", 4, "Бассет-хаунд", "Тигровый"));
+        dogs.add(Dog.builder().name("Шарик").age(4).breed("Лабрадор").color("Черный").build());
+        dogs.add(Dog.builder().name("Дружок").age(3).breed("Бульдог").color("Бежевый").build());
+        dogs.add(Dog.builder().name("Рекс").age(5).breed("Немецкая овчарка").color("Черный").build());
+        dogs.add(Dog.builder().name("Тузик").age(2).breed("Сибирский хаски").color("Серый").build());
+        dogs.add(Dog.builder().name("Малышка").age(1).breed("Йоркширский терьер").color("Кремовый").build());
+        dogs.add(Dog.builder().name("Бобик").age(7).breed("Кокер-спаниель").color("Рыжий").build());
+        dogs.add(Dog.builder().name("Грей").age(6).breed("Бордер-колли").color("Чёрный с белым").build());
+        dogs.add(Dog.builder().name("Лаки").age(3).breed("Пудель").color("Белый").build());
+        dogs.add(Dog.builder().name("Сэм").age(2).breed("Австралийская овчарка").color("Коричневый").build());
+        dogs.add(Dog.builder().name("Чарли").age(4).breed("Бассет-хаунд").color("Тигровый").build());
 
-        try(Connection connection = DriverManager.getConnection(URL + DB_NAME, USERNAME, PASSWORD)){
+        try (Connection connection = DriverManager.getConnection(URL + DB_NAME, USERNAME, PASSWORD)) {
             PreparedStatement preparedStatement = connection.prepareStatement(SQL_DOG_INSERT);
             for (Dog dog : dogs) {
                 preparedStatement.setString(1, dog.getName());
@@ -109,33 +101,25 @@ class DataInitializer {
                 preparedStatement.addBatch();
             }
             preparedStatement.executeBatch();
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    private static Dog getDog(String name, int age, String breed, String color){
-        Dog dog = new Dog();
-        dog.setName(name);
-        dog.setAge(age);
-        dog.setBreed(breed);
-        dog.setColor(color);
-        return dog;
-    }
 
     private static void fillDataHumansTable() throws SQLException {
-        humans.add(getHuman("Иван", "Иванов", "Иванович", 30));
-        humans.add(getHuman("Мария", "Петрова", "Петровна", 25));
-        humans.add(getHuman("Алексей", "Сидоров", "Алексеевич", 40));
-        humans.add(getHuman("Ольга", "Кузнецова", "Сергеевна", 28));
-        humans.add(getHuman("Дмитрий", "Смирнов", "Дмитриевич", 35));
-        humans.add(getHuman("Анна", "Васильева", "Андреевна", 22));
-        humans.add(getHuman("Сергей", "Попов", "Сергеевич", 45));
-        humans.add(getHuman("Елена", "Морозова", "Игоревна", 32));
-        humans.add(getHuman("Николай", "Новиков", "Николаевич", 50));
-        humans.add(getHuman("Татьяна", "Зайцева", "Викторовна", 29));
+        humans.add(Human.builder().name("Иван").surname("Иванов").patronymic("Иванович").age(30).build());
+        humans.add(Human.builder().name("Мария").surname("Петрова").patronymic("Петровна").age(25).build());
+        humans.add(Human.builder().name("Алексей").surname("Сидоров").patronymic("Алексеевич").age(40).build());
+        humans.add(Human.builder().name("Ольга").surname("Кузнецова").patronymic("Сергеевна").age(28).build());
+        humans.add(Human.builder().name("Дмитрий").surname("Смирнов").patronymic("Дмитриевич").age(35).build());
+        humans.add(Human.builder().name("Анна").surname("Васильева").patronymic("Андреевна").age(22).build());
+        humans.add(Human.builder().name("Сергей").surname("Попов").patronymic("Сергеевич").age(45).build());
+        humans.add(Human.builder().name("Елена").surname("Морозова").patronymic("Игоревна").age(32).build());
+        humans.add(Human.builder().name("Николай").surname("Новиков").patronymic("Николаевич").age(50).build());
+        humans.add(Human.builder().name("Татьяна").surname("Зайцева").patronymic("Викторовна").age(29).build());
 
-        try(Connection connection = DriverManager.getConnection(URL + DB_NAME, USERNAME, PASSWORD)){
+        try (Connection connection = DriverManager.getConnection(URL + DB_NAME, USERNAME, PASSWORD)) {
             PreparedStatement preparedStatement = connection.prepareStatement(SQL_HUMAN_INSERT);
             for (Human human : humans) {
                 preparedStatement.setString(1, human.getName());
@@ -146,32 +130,21 @@ class DataInitializer {
                 preparedStatement.addBatch();
             }
             preparedStatement.executeBatch();
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
     private static void setRandomPetsOrNull(PreparedStatement preparedStatement) throws SQLException {
-        if(random.nextInt(1, 11) % 2 == 0){
+        if (random.nextInt(1, 11) % 2 == 0) {
             preparedStatement.setNull(5, Types.INTEGER);
-        }else{
+        } else {
             preparedStatement.setInt(5, random.nextInt(1, 11));
         }
-        if(random.nextInt(1, 11) % 2 == 0){
+        if (random.nextInt(1, 11) % 2 == 0) {
             preparedStatement.setNull(6, Types.INTEGER);
-        }else{
+        } else {
             preparedStatement.setInt(6, random.nextInt(1, 11));
         }
-    }
-
-    private static Human getHuman(String name, String surname, String patronymic, int age){
-        Human human = new Human();
-        human.setName(name);
-        human.setSurname(surname);
-        human.setPatronymic(patronymic);
-        human.setAge(age);
-        human.setDog(null);
-        human.setCat(null);
-        return human;
     }
 }

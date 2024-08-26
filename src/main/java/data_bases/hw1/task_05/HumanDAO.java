@@ -129,44 +129,47 @@ public class HumanDAO {
     }
 
     private Cat getCatFromResultSet(ResultSet resultSet) throws SQLException {
-        Cat cat = new Cat();
-        cat.setId(resultSet.getInt(1));
-        cat.setName(resultSet.getString(2));
-        cat.setAge(resultSet.getInt(3));
-        cat.setBreed(resultSet.getString(4));
-        cat.setColor(resultSet.getString(5));
-        return cat;
+        return Cat.builder()
+                .id(resultSet.getInt(1))
+                .name(resultSet.getString(2))
+                .age(resultSet.getInt(3))
+                .breed(resultSet.getString(4))
+                .color(resultSet.getString(5))
+                .build();
     }
 
     private Dog getDogFromResultSet(ResultSet resultSet) throws SQLException {
-        Dog dog = new Dog();
-        dog.setId(resultSet.getInt(1));
-        dog.setName(resultSet.getString(2));
-        dog.setAge(resultSet.getInt(3));
-        dog.setBreed(resultSet.getString(4));
-        dog.setColor(resultSet.getString(5));
-        return dog;
+        return Dog.builder()
+                .id(resultSet.getInt(1))
+                .name(resultSet.getString(2))
+                .age(resultSet.getInt(3))
+                .breed(resultSet.getString(4))
+                .color(resultSet.getString(5))
+                .build();
     }
 
     //        "insert into humans_v3(name, surname, patronymic, age, cat_id, dog_id) values(?,?,?,?,?,?)";
     private Human getHumanFromResultSet(ResultSet resultSet) throws SQLException {
-        Human human = new Human();
-        human.setId(resultSet.getInt(1));
-        human.setName(resultSet.getString(2));
-        human.setSurname(resultSet.getString(3));
-        human.setPatronymic(resultSet.getString(4));
-        human.setAge(resultSet.getInt(5));
+        Human.HumanBuilder builder = Human.builder()
+                .id(resultSet.getInt(1))
+                .name(resultSet.getString(2))
+                .surname(resultSet.getString(3))
+                .patronymic(resultSet.getString(4))
+                .age(resultSet.getInt(5));
+
         try {
-            human.setCat(getCatById(resultSet.getInt(6)));
+            builder.cat(getCatById(resultSet.getInt(6)));
         } catch (SQLException e) {
-            human.setCat(null);
+            builder.cat(null);
         }
+
         try {
-            human.setDog(getDogById(resultSet.getInt(7)));
+            builder.dog(getDogById(resultSet.getInt(7)));
         } catch (SQLException e) {
-            human.setDog(null);
+            builder.dog(null);
         }
-        return human;
+
+        return builder.build();
     }
 
 }

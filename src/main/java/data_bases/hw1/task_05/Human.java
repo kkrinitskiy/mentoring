@@ -1,7 +1,9 @@
 package data_bases.hw1.task_05;
 
+import lombok.Builder;
 import lombok.Data;
 
+@Builder
 @Data
 class Human {
     private int id;
