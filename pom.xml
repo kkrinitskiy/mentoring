@@ -15,7 +15,9 @@
     </properties>
 
     <dependencies>
+
         <!-- Зависимости для тренировки работы с jdbc и hibernate-->
+
         <dependency>
             <groupId>com.github.docker-java</groupId>
             <artifactId>docker-java</artifactId>
@@ -70,6 +72,7 @@
             <artifactId>javassist</artifactId>
             <version>3.29.0-GA</version>
         </dependency>
+
     </dependencies>
 
 </project>
