@@ -4,6 +4,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -35,6 +36,16 @@ public class Main {
             transaction.commit();
         }
 
+        List<Employee> es;
+
+        try(Session session = sessionFactory.openSession()) {
+            Transaction transaction = session.beginTransaction();
+            Query<Employee> fromEmployee = session.createQuery("from Employee", Employee.class);
+            es = new ArrayList<>(fromEmployee.list());
+            transaction.commit();
+        }
+
+        es.forEach(System.out::println);
     }
 
     private static void createDataLists(){

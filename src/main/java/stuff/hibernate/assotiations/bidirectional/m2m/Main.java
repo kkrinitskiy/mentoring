@@ -1,5 +1,6 @@
 package stuff.hibernate.assotiations.bidirectional.m2m;
 
+import com.github.dockerjava.api.model.Task;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -16,22 +17,26 @@ public class Main {
         SessionFactory sessionFactory = new Configuration()
                 .addAnnotatedClass(Employee.class)
                 .addAnnotatedClass(EmployeeTask.class)
+                .addAnnotatedClass(Occupation.class)
                 .buildSessionFactory();
 
         createDataLists();
-
+        Occupation o1 = new Occupation();
+        o1.setOccupationName("director");
         Employee e1 = employees.get(0);
-        Employee e2 = employees.get(1);
+//        Employee e2 = employees.get(1);
         EmployeeTask t1 = employeeTasks.get(0);
-        EmployeeTask t2 = employeeTasks.get(1);
+        e1.setOccupation(o1);
+//        EmployeeTask t2 = employeeTasks.get(1);
 
         e1.getTasks().add(t1);
-        e2.getTasks().add(t2);
+//        e2.getTasks().add(t2);
 
         try(Session session = sessionFactory.openSession()) {
             Transaction transaction = session.beginTransaction();
+            session.persist(o1);
+            e1.setOccupation(o1);
             session.persist(e1);
-            session.persist(e2);
             transaction.commit();
         }
 
@@ -40,7 +45,6 @@ public class Main {
     private static void createDataLists(){
         employees.add(Employee.builder()
                 .name("Alice Smith")
-                .occupation("Software Engineer")
                 .salary(85000)
                 .age(28)
                 .join(new Date())
@@ -50,7 +54,6 @@ public class Main {
         employees.add(Employee.builder()
                 .tasks(new ArrayList<>())
                 .name("Bob Johnson")
-                .occupation("Project Manager")
                 .salary(95000)
                 .age(35)
                 .join(new Date())
@@ -59,7 +62,6 @@ public class Main {
         employees.add(Employee.builder()
                 .name("Charlie Brown")
                 .tasks(new ArrayList<>())
-                .occupation("UI/UX Designer")
                 .salary(70000)
                 .age(27)
                 .join(new Date())
@@ -67,7 +69,6 @@ public class Main {
 
         employees.add(Employee.builder()
                 .name("Diana Prince")
-                .occupation("Data Scientist")
                 .salary(98000)
                 .age(30)
                 .tasks(new ArrayList<>())
@@ -76,7 +77,6 @@ public class Main {
 
         employees.add(Employee.builder()
                 .name("Ethan Hunt")
-                .occupation("DevOps Engineer")
                 .salary(90000)
                 .tasks(new ArrayList<>())
                 .age(32)

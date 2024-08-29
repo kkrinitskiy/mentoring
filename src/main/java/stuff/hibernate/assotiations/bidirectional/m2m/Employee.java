@@ -20,7 +20,9 @@ class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
-    private String occupation;
+    @OneToOne
+    @JoinColumn(nullable = false, referencedColumnName = "id")
+    private Occupation occupation;
     private Integer salary;
     private Integer age;
     @Column(name = "join_date")
