@@ -1,10 +1,7 @@
-package data_bases.hw2.task_03;
+package data_bases.hw2.task_03.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -12,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 @Table(name = "cars")
-public class Car implements Transportable{
+public class Car implements Transportable {
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
    private Long id;
@@ -26,7 +23,7 @@ public class Car implements Transportable{
    private Double length;
 
    @Override
-   public double costDelivery() {
+   public Double costDelivery() {
       return bodyType.getCostDelivery();
    }
 }

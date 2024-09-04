@@ -1,4 +1,4 @@
-package data_bases.hw2.task_03;
+package data_bases.hw2.task_03.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data
 @Table(name = "wood")
-public class Wood implements Transportable{
+public class Wood implements Transportable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,7 +22,7 @@ public class Wood implements Transportable{
     private Double costDelivery;
 
     @Override
-    public double costDelivery() {
+    public Double costDelivery() {
         return costDelivery;
     }
 

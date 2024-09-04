@@ -1,4 +1,4 @@
-package data_bases.hw2.task_03;
+package data_bases.hw2.task_03.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
