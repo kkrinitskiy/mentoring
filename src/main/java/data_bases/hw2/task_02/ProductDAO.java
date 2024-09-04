@@ -10,30 +10,47 @@ public class ProductDAO {
     private final SessionFactory sessionFactory = UtilSessionFactory.getSessionFactory();
 
     public List<Product> getAllProducts() {
+        Transaction transaction = null;
         try (Session session = sessionFactory.openSession()) {
-            return session.createQuery("from Product", Product.class).list();
+            transaction = session.beginTransaction();
+            List<Product> fromProduct = session.createQuery("from Product", Product.class).list();
+            transaction.commit();
+            return fromProduct;
+        }catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            throw new RuntimeException(e);
         }
     }
 
     public boolean addProduct(Product product) {
+        Transaction transaction = null;
         try (Session session = sessionFactory.openSession()) {
-            Transaction transaction = session.beginTransaction();
+            transaction = session.beginTransaction();
             session.persist(product);
             transaction.commit();
             return true;
         }catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
             e.printStackTrace();
             return false;
         }
     }
 
     public boolean addProductList(List<Product> products) {
+        Transaction transaction = null;
         try (Session session = sessionFactory.openSession()) {
-            Transaction transaction = session.beginTransaction();
+            transaction = session.beginTransaction();
             session.createNativeQuery(multiInsertSQL(products), Product.class).executeUpdate();
             transaction.commit();
             return true;
         }catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
             e.printStackTrace();
             return false;
         }
