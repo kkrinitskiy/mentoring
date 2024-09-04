@@ -16,14 +16,13 @@ public class Wood implements Transportable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Double width;
-    private Double height;
-    private Double length;
-    private Double costDelivery;
+    private Integer width;
+    private Integer height;
+    private Integer length;
 
     @Override
     public Double costDelivery() {
-        return costDelivery;
+        return getVolume().doubleValue() * 80;
     }
 
 

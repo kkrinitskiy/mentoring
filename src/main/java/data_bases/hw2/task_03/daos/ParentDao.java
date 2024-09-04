@@ -8,11 +8,6 @@ import java.util.List;
 
 public interface ParentDao<T> {
     List<T> getAll();
-    default boolean addList(List<T> list){
-        try (Session session = getSession()) {
-
-        }
-    }
     boolean add(T t);
     boolean delete(T t);
     boolean update(T t);

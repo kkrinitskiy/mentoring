@@ -18,9 +18,9 @@ public class Car implements Transportable {
    @ManyToOne
    @JoinColumn(name = "body_type_id", referencedColumnName = "id")
    private TypesOfBodies bodyType;
-   private Double width;
-   private Double height;
-   private Double length;
+   private Integer width;
+   private Integer height;
+   private Integer length;
 
    @Override
    public Double costDelivery() {
